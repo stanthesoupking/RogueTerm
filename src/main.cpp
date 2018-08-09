@@ -36,7 +36,8 @@ int main(int argc, char **argv) {
 // Initialise the demo
 bool init() {
     font = new RT_Font("./fonts/terminal.png");
-    window = new RT_Window(font, WINDOW_COLUMNS, WINDOW_ROWS, "RogueTerm - Demo");
+    window = new RT_Window(font, WINDOW_COLUMNS, WINDOW_ROWS, "RogueTerm - Demo",
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
     // Initialise player in the center of the 'room'
     player_x = WINDOW_COLUMNS / 2;

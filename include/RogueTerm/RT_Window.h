@@ -19,9 +19,9 @@ class RT_Window
 
         RT_Font* font;
     public:
-        RT_Window(RT_Font* _font, int _width, int _height, const char *title);
+        RT_Window(RT_Font* _font, int _width, int _height, const char *title, Uint32 flags);
         ~RT_Window();
-        bool init_window();
+        bool init_window(Uint32 flags);
         void clear();
         void update();
 
