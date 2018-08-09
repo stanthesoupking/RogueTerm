@@ -85,8 +85,6 @@ void startLoop() {
                 }
             }
         }
-
-        printf("X:%d, Y%d\n", player_x, player_y);
         
         render(); // Render scene
     }
