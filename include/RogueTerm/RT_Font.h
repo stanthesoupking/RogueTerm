@@ -10,7 +10,7 @@
 class RT_Font {
     private:
         // Font texture
-        SDL_Surface *texture = NULL;
+        SDL_Surface *surface = NULL;
 
         // Number of columns and rows on a typical font image
         const int CHAR_COLUMNS = 32;
