@@ -7,20 +7,21 @@ RT_Font::RT_Font(const char *src) {
     }
 }
 
+// Free used memory
 RT_Font::~RT_Font() {
-
+    SDL_FreeSurface(surface);
 }
 
 bool RT_Font::load_font(const char *src) {
     SDL_RWops *rwop = SDL_RWFromFile(src, "rb");
-    texture = IMG_LoadPNG_RW(rwop);
+    surface = IMG_LoadPNG_RW(rwop);
     
-    // Return false if texture failed to load
-    if(texture == NULL) {
+    // Return false if surface failed to load
+    if(surface == NULL) {
         return false;
     }
 
-    character_dimensions = {0,0,texture->w/CHAR_COLUMNS, texture->h/CHAR_ROWS};
+    character_dimensions = {0,0,surface->w/CHAR_COLUMNS, surface->h/CHAR_ROWS};
     return true;
 }
 
@@ -57,7 +58,7 @@ void RT_Font::blit_char(char c, SDL_Surface* dst, int x, int y, RT_Colour *colou
     SDL_Rect crect = get_char_sdl_rect(c);
     SDL_Rect drect = {x, y, crect.w, crect.h};
 
-    SDL_BlitSurface(texture, &crect, dst, &drect);
+    SDL_BlitSurface(surface, &crect, dst, &drect);
 
     // If a colour was given then apply it
     if(colour != NULL) {
