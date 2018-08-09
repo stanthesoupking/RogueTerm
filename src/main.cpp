@@ -98,7 +98,7 @@ void render() {
     RT_Colour subtitle_colour = {200,200,200};
 
     window->draw_string("Welcome to the RogueTerm demo!",1,1, &title_colour);
-    window->draw_string("Use the arrow keys to move the character around...░▒", 1, 2, &subtitle_colour);
+    window->draw_string("Use the arrow keys to move the character around...", 1, 2, &subtitle_colour);
 
     window->draw_char(player_char, player_x, player_y, &player_colour);
 
