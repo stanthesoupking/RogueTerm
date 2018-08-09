@@ -1,3 +1,5 @@
 # RogueTerm
 Minimal toolkit for creating text-based roguelike games
-![alt text](./img/screenshot.png)
+<p align="center">
+<img src="./img/screenshot.png" width="400px"></img>
+</p>
