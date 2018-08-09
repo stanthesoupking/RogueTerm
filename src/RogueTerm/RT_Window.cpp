@@ -47,19 +47,19 @@ void RT_Window::update() {
 }
 
 // Draws a character at the given coordinates
-void RT_Window::draw_char(char c, int cx, int cy) {
+void RT_Window::draw_char(char c, int cx, int cy, RT_Colour *colour) {
     RT_Rect fdim = font->get_font_dimensions();
 
-    font->blit_char(c, surface, cx*fdim.width, cy*fdim.height);
+    font->blit_char(c, surface, cx*fdim.width, cy*fdim.height, colour);
 }
 
 // Draws a string at the given coordinates
-void RT_Window::draw_string(const char* string, int cx, int cy) {
+void RT_Window::draw_string(const char* string, int cx, int cy, RT_Colour *colour) {
     RT_Rect fdim = font->get_font_dimensions();
 
     int i = 0;
     char c;
     while((c = string[i++]) != '\0') {
-        font->blit_char(c, surface, (cx + i)*fdim.width, cy*fdim.height);
+        font->blit_char(c, surface, (cx + i)*fdim.width, cy*fdim.height, colour);
     }
 }

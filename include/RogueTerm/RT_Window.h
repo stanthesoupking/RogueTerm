@@ -25,6 +25,6 @@ class RT_Window
         void clear();
         void update();
 
-        void draw_char(char c, int cx, int cy);
-        void draw_string(const char *string, int cx, int cy);
+        void draw_char(char c, int cx, int cy, RT_Colour *colour);
+        void draw_string(const char *string, int cx, int cy, RT_Colour *colour);
 };

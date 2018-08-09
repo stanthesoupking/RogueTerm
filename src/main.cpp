@@ -60,7 +60,9 @@ void startLoop() {
 void render() {
     window->clear();
 
-    window->draw_string("Hello, world.",1,1);
+    RT_Colour colour = {0, 255, 0};
+
+    window->draw_string("Hello, world.",1,1,&colour);
 
     window->update();
 }

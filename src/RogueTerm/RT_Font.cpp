@@ -53,9 +53,18 @@ SDL_Rect RT_Font::get_char_sdl_rect(char c) {
             character_dimensions.height};
 }
 
-void RT_Font::blit_char(char c, SDL_Surface* dst, int x, int y) {
+void RT_Font::blit_char(char c, SDL_Surface* dst, int x, int y, RT_Colour *colour) {
     SDL_Rect crect = get_char_sdl_rect(c);
     SDL_Rect drect = {x, y, crect.w, crect.h};
 
     SDL_BlitSurface(texture, &crect, dst, &drect);
+
+    // If a colour was given then apply it
+    if(colour != NULL) {
+        SDL_Surface *cmod = SDL_CreateRGBSurface(0, character_dimensions.width, character_dimensions.height, 32, 0, 0, 0, 0);
+        SDL_FillRect(cmod, NULL, SDL_MapRGB(cmod->format, colour->r, colour->g, colour->b));
+
+        SDL_SetSurfaceBlendMode(cmod, SDL_BLENDMODE_MOD);
+        SDL_BlitSurface(cmod, NULL, dst, &drect);
+    }
 }
