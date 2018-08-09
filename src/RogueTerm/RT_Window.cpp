@@ -9,6 +9,10 @@ RT_Window::RT_Window(RT_Font* _font, int _width, int _height, const char *_title
     init_window();
 }
 
+RT_Window::~RT_Window() {
+    SDL_FreeSurface(surface);
+}
+
 bool RT_Window::init_window() {
     // Generate pixel dimensions of window from character dimensions
     RT_Rect fdim = font->get_font_dimensions();

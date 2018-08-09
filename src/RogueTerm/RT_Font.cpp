@@ -66,5 +66,7 @@ void RT_Font::blit_char(char c, SDL_Surface* dst, int x, int y, RT_Colour *colou
 
         SDL_SetSurfaceBlendMode(cmod, SDL_BLENDMODE_MOD);
         SDL_BlitSurface(cmod, NULL, dst, &drect);
+
+        SDL_FreeSurface(cmod);
     }
 }
