@@ -72,6 +72,24 @@ void RT_Window::draw_string(const char* string, RT_Point2D pos, RT_Colour *colou
     }
 }
 
+// Draws a character at the given coordinates in custom font
+void RT_Window::draw_char(char c, RT_Point2D pos, RT_Colour *colour, RT_Font* cfont) {
+    RT_Rect fdim = cfont->get_font_dimensions();
+
+    cfont->blit_char(c, surface, {pos.x*fdim.width, pos.y*fdim.height}, colour);
+}
+
+// Draws a string at the given coordinates in custom font
+void RT_Window::draw_string(const char* string, RT_Point2D pos, RT_Colour *colour, RT_Font* cfont) {
+    RT_Rect fdim = cfont->get_font_dimensions();
+
+    int i = 0;
+    char c;
+    while((c = string[i++]) != '\0') {
+        cfont->blit_char(c, surface, {(pos.x + i - 1)*fdim.width, pos.y*fdim.height}, colour);
+    }
+}
+
 // Convert pixel to character cell coordinates
 RT_Point2D RT_Window::pixel_to_cell_coordinates(RT_Point2D pos) {
     RT_Rect fdim = font->get_font_dimensions();

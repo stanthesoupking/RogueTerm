@@ -5,6 +5,7 @@
 
 // The font to use in the game window
 RT_Font *font = NULL;
+RT_Font *font_invert = NULL;
 
 // The main game window
 RT_Window *window = NULL;
@@ -36,6 +37,8 @@ int main(int argc, char **argv) {
 // Initialise the demo
 bool init() {
     font = new RT_Font("./fonts/terminal.png");
+    font_invert = new RT_Font("./fonts/terminal_inverted.png");
+
     window = new RT_Window(font, WINDOW_COLUMNS, WINDOW_ROWS, "RogueTerm - Demo",
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
@@ -52,6 +55,7 @@ bool init() {
 void cleanup() {
     delete window;
     delete font;
+    delete font_invert;
 }
 
 // Start main program loop
@@ -98,7 +102,7 @@ void render() {
     RT_Colour title_colour = {255,255,255};
     RT_Colour subtitle_colour = {200,200,200};
 
-    window->draw_string("Welcome to the RogueTerm demo!", {1, 1}, &title_colour);
+    window->draw_string("Welcome to the RogueTerm demo!", {1, 1}, &title_colour, font_invert);
     window->draw_string("Use the arrow keys to move the character around...", {1, 2}, &subtitle_colour);
 
     window->draw_char(player_char, {player_x, player_y}, &player_colour);

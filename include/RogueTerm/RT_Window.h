@@ -30,6 +30,10 @@ class RT_Window
         void draw_char(char c, RT_Point2D pos, RT_Colour *colour);
         void draw_string(const char *string, RT_Point2D pos, RT_Colour *colour);
 
+        // Font override
+        void draw_char(char c, RT_Point2D pos, RT_Colour *colour, RT_Font* font);
+        void draw_string(const char *string, RT_Point2D pos, RT_Colour *colour, RT_Font* font);
+
         // Utility methods
         RT_Point2D pixel_to_cell_coordinates(RT_Point2D pos);
 };
