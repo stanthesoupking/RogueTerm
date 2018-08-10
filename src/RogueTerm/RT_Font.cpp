@@ -70,10 +70,10 @@ SDL_Rect RT_Font::get_char_sdl_rect(char c) {
             character_dimensions.height};
 }
 
-void RT_Font::blit_char(char c, SDL_Surface* dst, int x, int y, RT_Colour *colour) {
+void RT_Font::blit_char(char c, SDL_Surface* dst, RT_Point2D pos, RT_Colour *colour) {
     // Generate the rect of character texture and output rect
     SDL_Rect crect = get_char_sdl_rect(c);
-    SDL_Rect drect = {x, y, crect.w, crect.h};
+    SDL_Rect drect = {pos.x, pos.y, crect.w, crect.h};
 
     // Blit character to the destination surface
     SDL_BlitSurface(surface, &crect, dst, &drect);

@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "RogueTerm/RT_Rect.h"
+#include "RogueTerm/RT_Point2D.h"
 #include "RogueTerm/RT_Colour.h"
 #pragma once
 
@@ -26,5 +27,5 @@ class RT_Font {
         ~RT_Font();
         bool load_font(const char *src);
         RT_Rect get_font_dimensions();
-        void blit_char(char c, SDL_Surface* dst, int x, int y, RT_Colour *colour);
+        void blit_char(char c, SDL_Surface* dst, RT_Point2D pos, RT_Colour *colour);
 };

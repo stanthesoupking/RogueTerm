@@ -55,19 +55,26 @@ void RT_Window::update() {
 }
 
 // Draws a character at the given coordinates
-void RT_Window::draw_char(char c, int cx, int cy, RT_Colour *colour) {
+void RT_Window::draw_char(char c, RT_Point2D pos, RT_Colour *colour) {
     RT_Rect fdim = font->get_font_dimensions();
 
-    font->blit_char(c, surface, cx*fdim.width, cy*fdim.height, colour);
+    font->blit_char(c, surface, {pos.x*fdim.width, pos.y*fdim.height}, colour);
 }
 
 // Draws a string at the given coordinates
-void RT_Window::draw_string(const char* string, int cx, int cy, RT_Colour *colour) {
+void RT_Window::draw_string(const char* string, RT_Point2D pos, RT_Colour *colour) {
     RT_Rect fdim = font->get_font_dimensions();
 
     int i = 0;
     char c;
     while((c = string[i++]) != '\0') {
-        font->blit_char(c, surface, (cx + i)*fdim.width, cy*fdim.height, colour);
+        font->blit_char(c, surface, {(pos.x + i - 1)*fdim.width, pos.y*fdim.height}, colour);
     }
+}
+
+// Convert pixel to character cell coordinates
+RT_Point2D RT_Window::pixel_to_cell_coordinates(RT_Point2D pos) {
+    RT_Rect fdim = font->get_font_dimensions();
+    pos.x = pos.x / fdim.width;
+    pos.y = pos.y / fdim.height;
 }

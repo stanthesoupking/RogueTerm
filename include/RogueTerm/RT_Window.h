@@ -3,6 +3,7 @@
  */
 #include "SDL2/SDL.h"
 #include "RT_Font.h"
+#include "RT_Point2D.h"
 #include "RT_Rect.h"
 #include "RogueTerm/RT_CharacterMatrix.h"
 #pragma once
@@ -25,6 +26,10 @@ class RT_Window
         void clear();
         void update();
 
-        void draw_char(char c, int cx, int cy, RT_Colour *colour);
-        void draw_string(const char *string, int cx, int cy, RT_Colour *colour);
+        // Drawing methods
+        void draw_char(char c, RT_Point2D pos, RT_Colour *colour);
+        void draw_string(const char *string, RT_Point2D pos, RT_Colour *colour);
+
+        // Utility methods
+        RT_Point2D pixel_to_cell_coordinates(RT_Point2D pos);
 };

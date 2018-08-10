@@ -10,6 +10,7 @@
 
 #include "RT_Window.h"
 #include "RT_Font.h"
+#include "RT_Point2D.h"
 #include "RT_Rect.h"
 #include "RT_Colour.h"
 #include "RT_CharacterMatrix.h"
