@@ -5,7 +5,6 @@
 #include "RT_Font.h"
 #include "RT_Point2D.h"
 #include "RT_Rect.h"
-#include "RogueTerm/RT_CharacterMatrix.h"
 #pragma once
 
 class RT_Window
@@ -14,9 +13,8 @@ class RT_Window
         SDL_Window* window;
         SDL_Surface* surface;
 
-        int cwidth, cheight, pwidth, pheight;
+        RT_Rect csize, psize;
         const char *title;
-        RT_CharacterMatrix *character_matrix;
 
         RT_Font* font;
     public:
@@ -36,4 +34,6 @@ class RT_Window
 
         // Utility methods
         RT_Point2D pixel_to_cell_coordinates(RT_Point2D pos);
+        RT_Rect get_window_size();
+        RT_Rect get_window_pixel_size();
 };

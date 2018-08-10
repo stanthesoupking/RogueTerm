@@ -1,9 +1,8 @@
 #include "RogueTerm/RT_Window.h"
 
-RT_Window::RT_Window(RT_Font* _font, int _width, int _height, const char *_title, Uint32 flags) {
+RT_Window::RT_Window(RT_Font* _font, int width, int height, const char *_title, Uint32 flags) {
     font = _font;
-    cwidth = _width;
-    cheight = _height;
+    csize = {0, 0, width, height};
     title = _title;
 
     init_window(flags);
@@ -16,8 +15,7 @@ RT_Window::~RT_Window() {
 bool RT_Window::init_window(Uint32 flags) {
     // Generate pixel dimensions of window from character dimensions
     RT_Rect fdim = font->get_font_dimensions();
-    pwidth = fdim.width * cwidth;
-    pheight = fdim.height * cheight;
+    psize = {0, 0, fdim.width * csize.width, fdim.height * csize.height};
 
     // Initialize SDL
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -27,15 +25,13 @@ bool RT_Window::init_window(Uint32 flags) {
 
     // Create window
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED,
-        SDL_WINDOWPOS_UNDEFINED, pwidth, pheight, flags);
+        SDL_WINDOWPOS_UNDEFINED, psize.width, psize.height, flags);
     
     // Exit if window creation failed
     if(window == NULL) {
         printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
-
-    character_matrix = new RT_CharacterMatrix(cwidth, cheight);
 
     // Get the window surface
     surface = SDL_GetWindowSurface(window);
@@ -45,6 +41,13 @@ void RT_Window::clear() {
     // Update the window surface so the program doesn't freeze when the window
     // is resized.
     surface = SDL_GetWindowSurface(window);
+
+
+    // Update pixel and characters size
+    RT_Rect fdim = font->get_font_dimensions();
+
+    psize = {0, 0, surface->w, surface->h};
+    csize = {0, 0, psize.width / fdim.width, psize.height / fdim.height};
 
     // Fill surface with the color black
     SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0x00, 0x00, 0x00));
@@ -95,4 +98,14 @@ RT_Point2D RT_Window::pixel_to_cell_coordinates(RT_Point2D pos) {
     RT_Rect fdim = font->get_font_dimensions();
     pos.x = pos.x / fdim.width;
     pos.y = pos.y / fdim.height;
+}
+
+// Return window size in characters
+RT_Rect RT_Window::get_window_size() {
+    return csize;
+}
+
+// Return window size in pixels
+RT_Rect RT_Window::get_window_pixel_size() {
+    return psize;
 }

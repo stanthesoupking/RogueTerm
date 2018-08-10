@@ -99,13 +99,18 @@ void startLoop() {
 void render() {
     window->clear();
 
+    // Get window size in characters
+    RT_Rect csize = window->get_window_size();
+
     RT_Colour title_colour = {255,255,255};
     RT_Colour subtitle_colour = {200,200,200};
+
+    window->draw_char(player_char, {player_x, player_y}, &player_colour);
 
     window->draw_string("Welcome to the RogueTerm demo!", {1, 1}, &title_colour, font_invert);
     window->draw_string("Use the arrow keys to move the character around...", {1, 2}, &subtitle_colour);
 
-    window->draw_char(player_char, {player_x, player_y}, &player_colour);
+    window->draw_string("RogueTerm Alpha Build", {csize.width - 22, csize.height - 2}, &subtitle_colour, font_invert);
 
     window->update();
 }
