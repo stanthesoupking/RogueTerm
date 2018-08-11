@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
 // Initialise the demo
 bool init() {
     font = new RT_Font("./fonts/terminal.png");
-    font_invert = new RT_Font("./fonts/terminal_inverted.png");
+    font_invert = new RT_Font("./fonts/terminal_invert.png");
 
     window = new RT_Window(font, WINDOW_COLUMNS, WINDOW_ROWS, "RogueTerm - Demo",
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);

@@ -21,7 +21,11 @@ bool RT_Font::load_font(const char *src) {
         return false;
     }
 
-    character_dimensions = {0,0,surface->w/CHAR_COLUMNS, surface->h/CHAR_ROWS};
+    //SDL_SetColorKey(surface, true, SDL_MapRGB(surface->format, 100, 0, 100));
+
+    character_dimensions = {0,0,surface->w/csize.width, surface->h/csize.height};
+    printf("%d, %d", character_dimensions.width, character_dimensions.height);
+
     return true;
 }
 
@@ -29,51 +33,28 @@ RT_Rect RT_Font::get_font_dimensions() {
     return character_dimensions;
 }
 
-RT_Rect RT_Font::get_char_rect(char c) {
-    return {0,0,10,16};
-}
+RT_Point2D RT_Font::get_char_tile(char c) {
+    RT_Point2D pos = {c % csize.width, c / csize.width};
 
-SDL_Rect RT_Font::get_char_sdl_rect(char c) {
-    int row, col;
-    if((32 <= c) && (c <= 63)) {
-        row = 0;
-        col = c - 32;
-    }
-    else if(c == 64) {
-        row = 1;
-        col = 0;
-    }
-    else if((65 <= c) && (c <= 90)) {
-        row = 3;
-        col = c - 65;
-    }
-    else if((97 <= c) && (c <= 122)) {
-        row = 4;
-        col = c - 97;
-    }
-    else if((91 <= c) && (c <= 96)) {
-        row = 1;
-        col = c - 90;
-    }
-    else if((123 <= c) && (c <= 126)) {
-        row = 1;
-        col = c - 116;
-    }
-    else if((176 <= c) && (c <= 181)) {
-        row = 1;
-        col = c - 165;
-    }
-
-    return {col*character_dimensions.width,
-            row*character_dimensions.height,
-            character_dimensions.width,
-            character_dimensions.height};
+    return pos;
 }
 
 void RT_Font::blit_char(char c, SDL_Surface* dst, RT_Point2D pos, RT_Colour *colour) {
-    // Generate the rect of character texture and output rect
-    SDL_Rect crect = get_char_sdl_rect(c);
-    SDL_Rect drect = {pos.x, pos.y, crect.w, crect.h};
+    // Get tile position of character on the tileset
+    RT_Point2D tpos = get_char_tile(c);
+
+    // Blit wth the tile position
+    blit_tile(tpos, dst, pos, colour);
+}
+
+void RT_Font::blit_tile(RT_Point2D tpos, SDL_Surface* dst, RT_Point2D pos, RT_Colour *colour) {
+    // Generate the rect of tile texture
+    SDL_Rect crect = {tpos.x * character_dimensions.width,
+                      tpos.y  * character_dimensions.height,
+                      character_dimensions.width, character_dimensions.height};
+    
+    // Generate output rect
+    SDL_Rect drect = {pos.x, pos.y, character_dimensions.width, character_dimensions.height};
 
     // Blit character to the destination surface
     SDL_BlitSurface(surface, &crect, dst, &drect);

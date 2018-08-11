@@ -13,19 +13,20 @@ class RT_Font {
         // Font texture
         SDL_Surface *surface = NULL;
 
-        // Number of columns and rows on a typical font image
-        const int CHAR_COLUMNS = 32;
-        const int CHAR_ROWS = 8;
+        // Number of columns and rows inside the font texture
+        RT_Rect csize = {0, 0, 16, 16};
 
         // Dimensions of a character in pixels
         RT_Rect character_dimensions;
 
-        RT_Rect get_char_rect(char c);
-        SDL_Rect get_char_sdl_rect(char c);
+        RT_Point2D get_char_tile(char c);
     public:
         RT_Font(const char *src);
+        RT_Font(const char *src, RT_Rect _csize);
         ~RT_Font();
         bool load_font(const char *src);
         RT_Rect get_font_dimensions();
+
         void blit_char(char c, SDL_Surface* dst, RT_Point2D pos, RT_Colour *colour);
+        void blit_tile(RT_Point2D tpos, SDL_Surface* dst, RT_Point2D pos, RT_Colour *colour);
 };
