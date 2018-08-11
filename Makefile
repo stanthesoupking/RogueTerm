@@ -11,7 +11,7 @@ ODIR=object
 LIBS=-lSDL2 -lstdc++ -lSDL2_image
 
 INCLUDE = 
-OBJS = main RogueTerm/RT_Font RogueTerm/RT_Window RogueTerm/RT_CharacterMatrix
+OBJS = main RogueTerm/RT_Font RogueTerm/RT_Window
 
 FULL = $(OBJS)
 
