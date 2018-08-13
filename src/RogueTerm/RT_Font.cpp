@@ -3,7 +3,7 @@
 RT_Font::RT_Font(const char *src) {
     // Attempt to load font from given source path
     if(!load_font(src)) {
-        printf("Error: failed to load font\n");
+        printf("Error: failed to load font '%s'\n", src);
     }
 }
 
@@ -21,10 +21,7 @@ bool RT_Font::load_font(const char *src) {
         return false;
     }
 
-    //SDL_SetColorKey(surface, true, SDL_MapRGB(surface->format, 100, 0, 100));
-
     character_dimensions = {0,0,surface->w/csize.width, surface->h/csize.height};
-    printf("%d, %d", character_dimensions.width, character_dimensions.height);
 
     return true;
 }
