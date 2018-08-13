@@ -35,6 +35,8 @@ bool RT_Window::init_window(Uint32 flags) {
 
     // Get the window surface
     surface = SDL_GetWindowSurface(window);
+    
+    return true;
 }
 
 void RT_Window::clear() {
@@ -98,6 +100,8 @@ RT_Point2D RT_Window::pixel_to_cell_coordinates(RT_Point2D pos) {
     RT_Rect fdim = font->get_font_dimensions();
     pos.x = pos.x / fdim.width;
     pos.y = pos.y / fdim.height;
+
+    return pos;
 }
 
 // Return window size in characters
