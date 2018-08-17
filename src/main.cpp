@@ -1,4 +1,5 @@
 #include "RogueTerm/RogueTerm.h"
+#include <stdio.h>
 
 #define WINDOW_COLUMNS  64
 #define WINDOW_ROWS     32

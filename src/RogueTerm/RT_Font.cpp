@@ -1,4 +1,5 @@
 #include "RogueTerm/RT_Font.h"
+#include <stdio.h>
 
 RT_Font::RT_Font(const char *src) {
     // Attempt to load font from given source path

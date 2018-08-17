@@ -1,4 +1,5 @@
 #include "RogueTerm/RT_Window.h"
+#include <stdio.h>
 
 RT_Window::RT_Window(RT_Font* _font, int width, int height, const char *_title, Uint32 flags) {
     font = _font;
