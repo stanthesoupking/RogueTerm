@@ -4,7 +4,7 @@
 #define WINDOW_COLUMNS  64
 #define WINDOW_ROWS     32
 
-// The Font To Use In The Game Window
+// The font to use in the game window
 RT_Font *font = NULL;
 RT_Font *font_invert = NULL;
 
